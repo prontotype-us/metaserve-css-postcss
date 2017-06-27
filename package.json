@@ -1,0 +1,30 @@
+{
+  "name": "metaserve-css-postcss",
+  "version": "0.0.0",
+  "description": "metaserve plugin for rendering CSS from .sass files with PostCSS",
+  "homepage": "http://github.com/prontotype-us/metaserve-css-postcss",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/prontotype-us/metaserve-css-postcss.git"
+  },
+  "author": {
+    "name": "Sean Robertson",
+    "url": "http://sprobertson.com"
+  },
+  "scripts": {
+    "build": "coffee --bare -o lib -c src"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "autoprefixer": "^7.1.1",
+    "postcss": "^6.0.3",
+    "precss": "^1.4.0",
+    "sugarss": "^1.0.0"
+  },
+  "keywords": [
+    "metaserve",
+    "css",
+    "sass",
+    "postcss"
+  ]
+}
