@@ -4,11 +4,8 @@ postcss = require 'postcss'
 precss = require 'precss'
 sugarss = require 'sugarss'
 autoprefixer = require 'autoprefixer'
-postcss_bounce = require '../../../postcss-bounce/src'
 
 VERBOSE = process.env.METASERVE_VERBOSE?
-
-print = (o) -> console.log util.inspect o, depth: null, colors: true
 
 # ------------------------------------------------------------------------------
 
@@ -41,10 +38,15 @@ module.exports =
         console.log '[PostCSSCompiler.compile]', filename, config if VERBOSE
 
         source = fs.readFileSync(filename).toString()
-        console.log 'source', source
 
-        # postcss([precss, customplugin, autoprefixer])
-        postcss([precss, postcss_bounce])
+        # Build plugins list
+        plugins = [precss]
+        if config.plugins?
+            for plugin in config.plugins
+                plugins.push require plugin
+        plugins.push autoprefixer
+
+        postcss(plugins)
             .process source, {parser: sugarss}
             .then (compiled) ->
                 compiled = compiled.content
@@ -54,7 +56,5 @@ module.exports =
                     compiled
                 }
             .catch (err) ->
-                console.log 'faileure', err
                 cb err
-
 
