@@ -44,6 +44,8 @@ module.exports =
         plugins = [precss]
         if config.plugins?
             for plugin in config.plugins
+                if plugin[0] not in ['.', '/']
+                    plugin = './node_modules/' + plugin
                 plugins.push require path.resolve process.cwd(), plugin
         plugins.push autoprefixer
 
