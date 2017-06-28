@@ -1,5 +1,6 @@
 fs = require 'fs'
 util = require 'util'
+path = require 'path'
 postcss = require 'postcss'
 precss = require 'precss'
 sugarss = require 'sugarss'
@@ -43,7 +44,7 @@ module.exports =
         plugins = [precss]
         if config.plugins?
             for plugin in config.plugins
-                plugins.push require plugin
+                plugins.push require path.resolve process.cwd(), plugin
         plugins.push autoprefixer
 
         postcss(plugins)
