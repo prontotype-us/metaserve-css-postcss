@@ -18,6 +18,8 @@
   "dependencies": {
     "autoprefixer": "^7.1.1",
     "postcss": "^6.0.3",
+    "postcss-advanced-variables": "^1.2.2",
+    "postcss-color-function": "^4.0.0",
     "precss": "^1.4.0",
     "sugarss": "^1.0.0"
   },
