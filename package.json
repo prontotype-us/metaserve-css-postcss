@@ -1,6 +1,6 @@
 {
   "name": "metaserve-css-postcss",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "metaserve plugin for rendering CSS from .sass files with PostCSS",
   "homepage": "http://github.com/prontotype-us/metaserve-css-postcss",
   "repository": {
@@ -20,6 +20,7 @@
     "postcss": "^6.0.3",
     "postcss-advanced-variables": "^1.2.2",
     "postcss-color-function": "^4.0.0",
+    "postcss-extend": "^1.0.5",
     "precss": "^1.4.0",
     "sugarss": "^1.0.0"
   },
