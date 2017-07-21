@@ -4,8 +4,9 @@ path = require 'path'
 postcss = require 'postcss'
 precss = require 'precss'
 sugarss = require 'sugarss'
-postcss_color_function = require 'postcss-color-function'
 postcss_advanced_variables = require 'postcss-advanced-variables'
+postcss_color_function = require 'postcss-color-function'
+postcss_extend = require 'postcss-extend'
 autoprefixer = require 'autoprefixer'
 
 VERBOSE = process.env.METASERVE_VERBOSE?
@@ -43,7 +44,7 @@ module.exports =
         source = fs.readFileSync(filename).toString()
 
         # Build plugins list
-        plugins = [precss, postcss_advanced_variables, postcss_color_function]
+        plugins = [precss, postcss_advanced_variables, postcss_color_function, postcss_extend]
         if config.plugins?
             for plugin in config.plugins
                 if plugin[0] not in ['.', '/']
