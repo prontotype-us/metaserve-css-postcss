@@ -7,6 +7,7 @@ sugarss = require 'sugarss'
 postcss_advanced_variables = require 'postcss-advanced-variables'
 postcss_color_function = require 'postcss-color-function'
 postcss_extend = require 'postcss-extend'
+postcss_easy_import = require 'postcss-easy-import'
 autoprefixer = require 'autoprefixer'
 
 VERBOSE = process.env.METASERVE_VERBOSE?
@@ -41,15 +42,26 @@ module.exports =
     compile: (filename, config, context, cb) ->
         console.log '[PostCSSCompiler.compile]', filename, config if VERBOSE
 
+        # Read raw file
         source = fs.readFileSync(filename).toString()
 
         # Build plugins list
-        plugins = [precss, postcss_advanced_variables, postcss_color_function, postcss_extend]
+        plugins = [
+            postcss_easy_import {extensions: ['.sass'], path: ['css']}
+            precss
+            postcss_advanced_variables
+            postcss_color_function
+            postcss_extend
+        ]
+
+        # Add extra plugins from config
         if config.plugins?
             for plugin in config.plugins
                 if plugin[0] not in ['.', '/']
                     plugin = './node_modules/' + plugin
                 plugins.push require path.resolve process.cwd(), plugin
+
+        # Autoprefixer should run last
         plugins.push autoprefixer
 
         postcss(plugins)
@@ -62,5 +74,5 @@ module.exports =
                     compiled
                 }
             .catch (err) ->
+                console.error '[PostCSSCompiler.compile Error]', err
                 cb err
-
