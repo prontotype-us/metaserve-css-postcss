@@ -65,7 +65,7 @@ module.exports =
         plugins.push autoprefixer
 
         postcss(plugins)
-            .process source, {parser: sugarss}
+            .process source, {parser: sugarss, from: filename}
             .then (compiled) ->
                 compiled = compiled.content
                 cb null, {
